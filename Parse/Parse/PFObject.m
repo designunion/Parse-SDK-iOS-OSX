@@ -766,8 +766,18 @@ static void PFObjectAssertValueIsKindOfValidClass(id object) {
  */
 + (void)_assertValidInstanceClassName:(NSString *)className {
     NSLog(@"%@",className);
+    
     PFParameterAssert(className, @"Class name can't be 'nil'.");
-//     PFParameterAssert(![className hasPrefix:@"_"], @"Invalid class name. Class names cannot start with an underscore.");
+    
+    if (![className isEqualToString:@"_Installation"] &&
+        ![className isEqualToString:@"_Product"] &&
+        ![className isEqualToString:@"_Role"] &&
+        ![className isEqualToString:@"_Session"] &&
+        ![className isEqualToString:@"_User"]) {
+        
+        PFParameterAssert(![className hasPrefix:@"_"], @"Invalid class name. Class names cannot start with an underscore.");
+
+    }
 }
 
 ///--------------------------------------
